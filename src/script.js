@@ -199,50 +199,56 @@ document.addEventListener('click', function () {
 // ==========================================================================
 //    4. BASE DE DADOS E VALIDAÇÃO DE PERFIS (REQUISITOS DO PROFESSOR)
 // ==========================================================================
+const BASE_URL = "/PROJETO-ARCA---2026";
+
 const USUARIOS_PERFIS = {
-    "cassio": {
+    cassio: {
         senha: "23082007",
         nome: "Cassio Oliveira",
         links: [
-            { texto: "👤 Meus Animais", url: "/pages/usuarios/tutor.html" },
-            { texto: "🛠️ Minhas Solicitações", url: "/pages/usuarios/handout.html" },
-            { texto: "📅 Favoritos", url: "/pages/usuarios/favoritos.html" }
+            { texto: "👤 Meus Animais", url: `${BASE_URL}/pages/usuarios/tutor.html` },
+            { texto: "🛠️ Minhas Solicitações", url: `${BASE_URL}/pages/usuarios/handout.html` },
+            { texto: "📅 Favoritos", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     },
-    "tutor": {
+
+    tutor: {
         senha: "123456",
         nome: "Tutor de Animais",
         links: [
-            { texto: "👤 Meus Animais", url: "/pages/usuarios/tutor.html" },
-            { texto: "🛠️ Minhas Solicitações", url: "/pages/usuarios/handout.html" },
-            { texto: "📅 Favoritos", url: "/pages/usuarios/favoritos.html" }
+            { texto: "👤 Meus Animais", url: `${BASE_URL}/pages/usuarios/tutor.html` },
+            { texto: "🛠️ Minhas Solicitações", url: `${BASE_URL}/pages/usuarios/handout.html` },
+            { texto: "📅 Favoritos", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     },
-    "candidato": {
+
+    candidato: {
         senha: "cand!098",
         nome: "Candidato a Adotante",
         links: [
-            { texto: "🐾 Animais Disponíveis", url: "/pages/adocao/index.html" },
-            { texto: "📝 Formulário de Interesse", url: "/pages/usuarios/form_savor.html" },
-            { texto: "ℹ️ Status do Processo", url: "/pages/usuarios/processo.html" }
+            { texto: "🐾 Animais Disponíveis", url: `${BASE_URL}/pages/adocao/index.html` },
+            { texto: "📝 Formulário de Interesse", url: `${BASE_URL}/pages/usuarios/form_savor.html` },
+            { texto: "ℹ️ Status do Processo", url: `${BASE_URL}/pages/usuarios/processo.html` }
         ]
     },
-    "ong": {
+
+    ong: {
         senha: "ong$-135",
         nome: "ONG Parceira",
         links: [
-            { texto: "🐾 Cadastrar Animal", url: "/pages/usuarios/favoritos.html" },
-            { texto: "📊 Relatórios de Adoção", url: "/pages/usuarios/favoritos.html" },
-            { texto: "🤝 Solicitar Apoio", url: "/pages/usuarios/favoritos.html" }
+            { texto: "🐾 Cadastrar Animal", url: `${BASE_URL}/pages/usuarios/favoritos.html` },
+            { texto: "📊 Relatórios de Adoção", url: `${BASE_URL}/pages/usuarios/favoritos.html` },
+            { texto: "🤝 Solicitar Apoio", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     },
-    "prefeitura": {
+
+    prefeitura: {
         senha: "pref@456",
         nome: "Gestão Prefeitura",
         links: [
-            { texto: "📈 Painel de Castrações", url: "/pages/usuarios/favoritos.html" },
-            { texto: "🚨 Gerenciar Denúncias", url: "/pages/usuarios/favoritos.html" },
-            { texto: "🏢 Alocação de Recursos", url: "/pages/usuarios/favoritos.html" }
+            { texto: "📈 Painel de Castrações", url: `${BASE_URL}/pages/usuarios/favoritos.html` },
+            { texto: "🚨 Gerenciar Denúncias", url: `${BASE_URL}/pages/usuarios/favoritos.html` },
+            { texto: "🏢 Alocação de Recursos", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     }
 };
