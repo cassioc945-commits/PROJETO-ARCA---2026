@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCA • Adoção</title>
+
+    <link rel="stylesheet" href="../../src/style.css">
+</head>
+
+<body data-page="adocao">
+
+    <header class="container-nav">
+        <nav class="navegacao">
+            <ul class="menu-lista">
+
+                <li class="menu-item-container">
+                    <button class="dropdown-trigger">
+                        <img src="../../public/icones-images/menu.png" alt="menu-arca" class="icone-topo">
+                    </button>
+
+                    <div class="dropdown-menu">
+                        <ul class="dropdown-links">
+                            <li><a href="../../index.html">🏠︎ Menu</a></li>
+                            <li><a href="../../pages/adocao/index.html">🐾 Adotar</a></li>
+                            <li><a href="../../pages/castracao/index.html">🛠️ Castração</a></li>
+                            <li><a href="../../pages/denuncia/index.html">🚨 Fazer Denúncia</a></li>
+                            <li><a href="../../pages/pedido_resgate/index.html">🚨 Acionar Resgate</a></li>
+                            <li><a href="#ajuda">📱 Ouvidoria</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="barra-pesquisa">
+                    <input class="search" type="search" placeholder="🔎︎ Pesquisar">
+                </li>
+
+                <li class="bloco-direita-container">
+                    <ul class="menu-lista-02">
+                        <li><img src="../../public/icones-images/acessibilidade.png" alt="acessibilidade"
+                                class="ajuste-icon">
+                        </li>
+                        <li class="menu-item-container">
+                            <button class="dropdown-trigger">
+                                <img src="../../public/icones-images/perfil.png" alt="perfil" class="ajuste-icon">
+                            </button>
+                            <div class="dropdown-menu">
+                                <div id="conteudo-perfil">
+                                    <ul class="dropdown-links">
+                                        <li><a href="#" id="btn-entrar">🔑 Entrar / Login</a></li>
+                                        <li><a href="#">📝 Criar uma Conta</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    
+
+    <div class="main-container">
+
+        <aside class="sidebar-filtros">
+            <h2>Filtros</h2>
+
+            <label class="checkbox-container">
+                <input type="checkbox"> SOMENTE FAVORITOS
+            </label>
+
+            <select class="select-filtro">
+                <option value="" disabled selected>ComboBox</option>
+                <option value="1">Opção 1</option>
+                <option value="2">Opção 2</option>
+            </select>
+
+            <select class="select-filtro">
+                <option value="" disabled selected>ComboBox</option>
+                <option value="1">Opção 1</option>
+                <option value="2">Opção 2</option>
+            </select>
+
+            <select class="select-filtro">
+                <option value="" disabled selected>ComboBox</option>
+                <option value="1">Opção 1</option>
+                <option value="2">Opção 2</option>
+            </select>
+
+            <select class="select-filtro">
+                <option value="" disabled selected>ComboBox</option>
+                <option value="1">Opção 1</option>
+                <option value="2">Opção 2</option>
+            </select>
+
+            <button class="btn-filtro btn-filtrar">Filtrar</button>
+            <button class="btn-filtro btn-cancelar">Cancelar</button>
+        </aside>
+
+
+        <main class="content-area">
+
+            <div class="content-top-bar">
+                <div class="search-container">
+                    <span class="search-icon">&#128269;</span>
+
+                    <input type="search" class="search-input" placeholder="Pesquisar animal">
+                </div>
+                <select class="select-sort">
+                    <option value="" disabled selected>
+                        Ordenar
+                    </option>
+                    <option value="recentes">
+                        Mais recentes
+                    </option>
+                    <option value="relevancia">
+                        Relevância
+                    </option>
+                </select>
+            </div>
+
+            <section class="cards-list">
+
+                <a href="../../pages/adocao/adocao.html?id=1" class="link-unline">
+                    <article class="card-item">
+                        <img src="../../public/images/thor-cao.jpg" class="card-image-real">
+                        <div class="card-info">
+                            <div class="card-title-placeholder">
+                                Thor
+                            </div>
+                            <div class="card-text-placeholder">
+                                Thor é extremamente dócil,
+                                ama brincar e procura uma família
+                                cheia de amor e carinho.
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <a href="../../pages/adocao/adocao.html?id=2" class="link-unline">
+                    <article class="card-item">
+                        <img src="../../public/images/bidu-cao.jpeg" class="card-image-real">
+                        <div class="card-info">
+                            <div class="card-title-placeholder">
+                                Bidu
+                            </div>
+                            <div class="card-text-placeholder">
+                                Bidu é muito companheiro,
+                                ama carinho e gosta bastante
+                                de passeios ao ar livre.
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <a href="../../pages/adocao/adocao.html?id=3" class="link-unline">
+                    <article class="card-item">
+                        <img src="../../public/images/luna-cao.jpg" class="card-image-real">
+                        <div class="card-info">
+                            <div class="card-title-placeholder">
+                                Luna
+                            </div>
+                            <div class="card-text-placeholder">
+                                Luna é muito companheira,
+                                ama carinho e gosta bastante
+                                de passeios ao ar livre.
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <a href="../../pages/adocao/adocao.html?id=4" class="link-unline">
+                    <article class="card-item">
+                        <img src="../../public/images/max-cao.jpg" class="card-image-real">
+                        <div class="card-info">
+                            <div class="card-title-placeholder">
+                                Max
+                            </div>
+                            <div class="card-text-placeholder">
+                                Max é muito companheiro,
+                                ama carinho e gosta bastante
+                                de passeios ao ar livre.
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <a href="../../pages/adocao/adocao.html?id=5" class="link-unline">
+                    <article class="card-item">
+                        <img src="../../public/images/rex-cao.jpg" class="card-image-real">
+                        <div class="card-info">
+                            <div class="card-title-placeholder">
+                                Rex
+                            </div>
+                            <div class="card-text-placeholder">
+                                Rex é muito companheiro,
+                                ama carinho e gosta bastante
+                                de passeios ao ar livre.
+                            </div>
+                        </div>
+                    </article>
+                </a>
+            </section>
+
+            <button class="btn-back" onclick="window.history.back()">
+                <span class="material-symbols-outlined">arrow_left_alt</span>
+            </button>
+        </main>
+
+        <section>
+            <div id="modal-auth" class="modal-overlay">
+                <div class="modal-content auth-box">
+                    <button id="btn-fechar-auth" class="auth-close">&times;</button>
+
+                    <div class="auth-tabs">
+                        <button id="tab-login" class="auth-tab active">Entrar</button>
+                        <button id="tab-cadastro" class="auth-tab">Criar Conta</button>
+                    </div>
+
+                    <form id="form-autenticacao">
+                        <div class="form-group-block">
+                            <label class="rescue-label" id="label-usuario" for="auth-email">Usuário / Perfil</label>
+                            <input type="text" id="auth-email" class="rescue-input"
+                                placeholder="Ex: tutor, candidato, ong..." required autocomplete="off">
+                        </div>
+
+                        <div class="form-group-block">
+                            <label class="rescue-label" for="auth-senha">Senha</label>
+                            <input type="password" id="auth-senha" class="rescue-input" placeholder="Sua senha"
+                                required>
+                        </div>
+
+                        <button type="submit" id="btn-auth-principal" class="btn-enviar auth-submit-btn">Entrar</button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span>ou continue com</span>
+                    </div>
+
+                    <div class="auth-social-group">
+                        <button id="btn-login-google" type="button" class="btn-social google">
+                            <img src="../../public/icones-images/google.png" alt="Google">
+                            Entrar com o Google
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../../src/script.js"></script>
+</body>
+
+</html>
