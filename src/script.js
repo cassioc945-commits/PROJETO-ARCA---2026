@@ -204,45 +204,45 @@ const USUARIOS_PERFIS = {
         senha: "23082007",
         nome: "Cassio Oliveira",
         links: [
-            { texto: "👤 Meus Animais", url: "../../pages/usuarios/tutor.html" },
-            { texto: "🛠️ Minhas Solicitações", url: "../../pages/usuarios/handout.html" },
-            { texto: "📅 Favoritos", url: "../../pages/usuarios/favoritos.html" }
+            { texto: "👤 Meus Animais", url: "/pages/usuarios/tutor.html" },
+            { texto: "🛠️ Minhas Solicitações", url: "/pages/usuarios/handout.html" },
+            { texto: "📅 Favoritos", url: "/pages/usuarios/favoritos.html" }
         ]
     },
     "tutor": {
         senha: "123456",
         nome: "Tutor de Animais",
         links: [
-            { texto: "👤 Meus Animais", url: "../../pages/usuarios/tutor.html" },
-            { texto: "🛠️ Minhas Solicitações", url: "../../pages/usuarios/handout.html" },
-            { texto: "📅 Favoritos", url: "../../pages/usuarioss/favoritos.html" }
+            { texto: "👤 Meus Animais", url: "/pages/usuarios/tutor.html" },
+            { texto: "🛠️ Minhas Solicitações", url: "/pages/usuarios/handout.html" },
+            { texto: "📅 Favoritos", url: "/pages/usuarios/favoritos.html" }
         ]
     },
     "candidato": {
         senha: "cand!098",
         nome: "Candidato a Adotante",
         links: [
-            { texto: "🐾 Animais Disponíveis", url: "../../pages/adocao/index.html" },
-            { texto: "📝 Formulário de Interesse", url: "../../pages/usuarios/form_savor.html" },
-            { texto: "ℹ️ Status do Processo", url: "../../pages/usuarios/processo.html" }
+            { texto: "🐾 Animais Disponíveis", url: "/pages/adocao/index.html" },
+            { texto: "📝 Formulário de Interesse", url: "/pages/usuarios/form_savor.html" },
+            { texto: "ℹ️ Status do Processo", url: "/pages/usuarios/processo.html" }
         ]
     },
     "ong": {
         senha: "ong$-135",
         nome: "ONG Parceira",
         links: [
-            { texto: "🐾 Cadastrar Animal", url: "../../pages/usuarios/favoritos.html" },
-            { texto: "📊 Relatórios de Adoção", url: "../../pages/usuarios/favoritos.html" },
-            { texto: "🤝 Solicitar Apoio", url: "../../pages/usuarios/favoritos.html" }
+            { texto: "🐾 Cadastrar Animal", url: "/pages/usuarios/favoritos.html" },
+            { texto: "📊 Relatórios de Adoção", url: "/pages/usuarios/favoritos.html" },
+            { texto: "🤝 Solicitar Apoio", url: "/pages/usuarios/favoritos.html" }
         ]
     },
     "prefeitura": {
         senha: "pref@456",
         nome: "Gestão Prefeitura",
         links: [
-            { texto: "📈 Painel de Castrações", url: "../../pages/usuarios/favoritos.html" },
-            { texto: "🚨 Gerenciar Denúncias", url: "../../pages/usuarios/favoritos.html" },
-            { texto: "🏢 Alocação de Recursos", url: "../../pages/usuarios/favoritos.html" }
+            { texto: "📈 Painel de Castrações", url: "/pages/usuarios/favoritos.html" },
+            { texto: "🚨 Gerenciar Denúncias", url: "/pages/usuarios/favoritos.html" },
+            { texto: "🏢 Alocação de Recursos", url: "/pages/usuarios/favoritos.html" }
         ]
     }
 };
