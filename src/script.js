@@ -1,6 +1,4 @@
-//============================================================================
-//    1. CARROSSEL / SLIDER (Protegido contra ausência de elementos)
-//============================================================================
+"use strict";
 (function () {
     const slider = document.querySelectorAll('.slider');
     const btnPrev = document.getElementById('prev-button');
@@ -50,9 +48,8 @@
     }
 })();
 
-//============================================================================
-// POPUP UNIVERSAL
-//============================================================================
+
+
 
 (function () {
 
@@ -71,9 +68,9 @@
         return;
     }
 
-    // ==========================
-    // ABRIR MODAL
-    // ==========================
+
+
+
     btnAbrirModal.forEach(function (botao) {
 
         botao.onclick = function (event) {
@@ -86,9 +83,7 @@
 
     });
 
-    // ==========================
-    // CANCELAR
-    // ==========================
+
     botoesCancelar.forEach(function (btn) {
 
         btn.onclick = function () {
@@ -99,9 +94,6 @@
 
     });
 
-    // ==========================
-    // CONFIRMAR
-    // ==========================
     botoesConfirmar.forEach(function (btn) {
 
         btn.onclick = function () {
@@ -122,9 +114,6 @@
 
     });
 
-    // ==========================
-    // CONCLUIR
-    // ==========================
     botoesFecharSucesso.forEach(function (btn) {
 
         btn.onclick = function () {
@@ -168,9 +157,10 @@
     });
 
 })();
-//============================================================================
-//    3. HEADER - NAV & DROPDOWNS GERÉRICOS
-//============================================================================
+
+
+
+
 function gerenciarMenu(botao, menu, outroMenu) {
     if (botao && menu) {
         botao.addEventListener('click', function (evento) {
@@ -196,9 +186,9 @@ document.addEventListener('click', function () {
     if (listaPerfil && listaPerfil.classList.contains('active')) { listaPerfil.classList.remove('active'); }
 });
 
-// ==========================================================================
-//    4. BASE DE DADOS E VALIDAÇÃO DE PERFIS (REQUISITOS DO PROFESSOR)
-// ==========================================================================
+
+
+
 const BASE_URL = "/PROJETO-ARCA---2026";
 
 const USUARIOS_PERFIS = {
@@ -267,8 +257,6 @@ const formAutenticacao = document.getElementById('form-autenticacao');
 let modoFormulario = 'login';
 
 if (caixaConteudoPerfil && modalAuth) {
-
-    // --- MUDANÇA AQUI: Verifica se já existe um usuário salvo no sessionStorage ao carregar o arquivo ---
     const usuarioSalvo = sessionStorage.getItem('arca_usuario_ativo');
     if (usuarioSalvo && USUARIOS_PERFIS[usuarioSalvo]) {
         renderizarMenuLogado(usuarioSalvo, USUARIOS_PERFIS[usuarioSalvo]);
@@ -289,12 +277,10 @@ if (caixaConteudoPerfil && modalAuth) {
 
         if (target.id === 'btn-sair' || textoClique.includes('Sair do Painel')) {
             evento.preventDefault();
-
-            // --- MUDANÇA AQUI: Limpa a sessão quando o usuário clica em "Sair" ---
             sessionStorage.removeItem('arca_usuario_ativo');
 
             renderizarMenuDeslogado();
-            window.usuarioEstaLogado = false; // Sincroniza com o script de adoção
+            window.usuarioEstaLogado = false; 
             alert("Você saiu do painel do projeto Arca.");
         }
     });
@@ -361,8 +347,6 @@ if (caixaConteudoPerfil && modalAuth) {
 
                     if (perfil.senha === senhaDigitada) {
                         fecharModalAutenticacao();
-
-                        // --- MUDANÇA AQUI: Salva o login efetuado no sessionStorage antes de renderizar ---
                         sessionStorage.setItem('arca_usuario_ativo', usuarioMinusculo);
 
                         renderizarMenuLogado(usuarioMinusculo, perfil);
@@ -421,9 +405,10 @@ if (caixaConteudoPerfil && modalAuth) {
     }
 }
 
-//============================================================================
-//    5. RENDERIZAÇÃO DINÂMICA DO PET (PÁGINA DE DETALHES)
-//============================================================================
+
+
+
+
 const animais = [
     {
         id: 1,
@@ -561,9 +546,9 @@ function voltarPagina() {
 
 carregarAnimal();
 
-// ==========================================================================
-//    6. CONTROLADOR DE AÇÕES DE ADOÇÃO / FAVORITO (BLINDADO)
-// ==========================================================================
+
+
+
 window.usuarioEstaLogado = sessionStorage.getItem('arca_usuario_ativo') !== null;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -575,7 +560,6 @@ document.addEventListener("DOMContentLoaded", function () {
             evento.preventDefault();
             evento.stopPropagation();
 
-            // Atualiza o ID na memória no exato momento do clique
             let idDetectado = pegarId();
             if (idDetectado) {
                 localStorage.setItem('arca_id_animal_ativo', idDetectado);
@@ -615,7 +599,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// CORREÇÃO DA LETRA: Mudado de "ejecutar..." para "executar..." para bater com o resto do script!
+
+
+
 function executarAcaoFinal(acao) {
     if (acao === 'adotar') {
         window.location.href = "../adocao/registrar.html";
@@ -623,9 +609,12 @@ function executarAcaoFinal(acao) {
         alert("Animal adicionado aos seus favoritos com sucesso!");
     }
 }
-//============================================================================
-//    7. TELA DE STATUS, CHECK & SORTEIO DE VALIDAÇÃO
-//============================================================================
+
+
+
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
 
@@ -633,25 +622,22 @@ window.addEventListener('DOMContentLoaded', () => {
     const message = document.getElementById('mensagem');
     const botaoAcao = document.getElementById('botaoAcao');
 
-    // Recupera o ID do bicho clicado que deixamos guardado na memória
+
     let idSalvo = localStorage.getItem('arca_id_animal_ativo');
     if (!idSalvo) {
-        idSalvo = 1; // Padrão de segurança caso não ache nada
+        idSalvo = 1; 
     }
 
-    // --- CORREÇÃO PARA A TELA DE CHECK (A tela do botão verde) ---
-    // Procura o botão verde "VERIFICAR APROVAÇÃO" na tela atual
+
     const btnVerificarAprovacao = document.getElementById('botaoAcaoStatus') || document.querySelector('a[href*="action=sorteio"]') || document.getElementById('verificar-aprovacao');
 
-    // Se encontrar o botão verde na página, força ele a levar a ação de sorteio junto com o ID salvo
+   
     if (btnVerificarAprovacao) {
         btnVerificarAprovacao.onclick = function (e) {
             e.preventDefault();
-            // Redireciona para a página de status passando a ação de sorteio E o ID correto do animal
             window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
         };
     }
-    // Uma segunda tentativa caso o botão verde seja um link simples (com a classe ou ID do seu projeto)
     const btnVerificarGenerico = document.querySelector('.btn-enviar, .verificar-btn, button, a');
     if (btnVerificarGenerico && btnVerificarGenerico.textContent.includes('VERIFICAR APROVAÇÃO')) {
         btnVerificarGenerico.onclick = function (e) {
@@ -660,8 +646,6 @@ window.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-
-    // --- CÓDIGO DO SORTEIO (Roda apenas quando a URL tiver "?action=sorteio") ---
     if (params.get('action') === 'sorteio') {
         if (!body || !message || !botaoAcao) return;
 
@@ -672,7 +656,7 @@ window.addEventListener('DOMContentLoaded', () => {
             message.textContent = "Solicitação de aprovada";
             botaoAcao.textContent = "Local de retirada";
 
-            // Injeta o ID recuperado da memória no link do botão final
+    
             botaoAcao.href = `../../pages/adocao/confirm.html?id=${idSalvo}`;
         } else {
             body.className = "rejected";
@@ -681,7 +665,6 @@ window.addEventListener('DOMContentLoaded', () => {
             botaoAcao.href = "javascript:window.history.back()";
         }
     } else {
-        // Se entrou na página de status sem o parâmetro de sorteio, ignora
         if (!body && !message && !botaoAcao) {
             return;
         }
