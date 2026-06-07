@@ -1,4 +1,5 @@
 "use strict";
+
 (function () {
     const slider = document.querySelectorAll('.slider');
     const btnPrev = document.getElementById('prev-button');
@@ -51,8 +52,13 @@
 
 
 
-(function () {
 
+
+
+
+
+
+(function () {
     const pagina = document.body.dataset.page;
 
     const btnAbrirModal = document.querySelectorAll(".btnAbrirModal");
@@ -68,123 +74,103 @@
         return;
     }
 
-
-
-
     btnAbrirModal.forEach(function (botao) {
-
         botao.onclick = function (event) {
-
             event.preventDefault();
-
             modal.classList.add("mostrar");
-
         };
-
     });
 
-
     botoesCancelar.forEach(function (btn) {
-
         btn.onclick = function () {
-
             modal.classList.remove("mostrar");
-
         };
-
     });
 
     botoesConfirmar.forEach(function (btn) {
-
         btn.onclick = function () {
-
             modal.classList.remove("mostrar");
-
             telaCarregando.classList.add("mostrar");
 
             setTimeout(function () {
-
                 telaCarregando.classList.remove("mostrar");
-
                 telaSucesso.classList.add("mostrar");
-
             }, 3000);
-
         };
-
     });
 
     botoesFecharSucesso.forEach(function (btn) {
-
         btn.onclick = function () {
-
             if (pagina === "resgate") {
-
-                window.location.href =
-                    "./protocolo.html";
-
-            }
-
-            else if (pagina === "adocao") {
-
-                window.location.href =
-                    "../../pages/adocao/check.html";
-
-            }
-
-            else if (pagina === "castracao") {
-
-                window.location.href =
-                    "../../pages/castracao/check.html";
-
-            }
-
-            else if (pagina === "denuncia") {
-
-                window.location.href =
-                    "../../pages/denuncia";
-
-            }
-
-            else {
-
+                window.location.href = "./protocolo.html";
+            } else if (pagina === "adocao") {
+                window.location.href = "../../pages/adocao/check.html";
+            } else if (pagina === "castracao") {
+                window.location.href = "../../pages/castracao/check.html";
+            } else if (pagina === "denuncia") {
+                window.location.href = "../../pages/denuncia";
+            } else {
                 telaSucesso.classList.remove("mostrar");
-
             }
-
         };
-
     });
-
 })();
 
 
 
 
-function gerenciarMenu(botao, menu, outroMenu) {
-    if (botao && menu) {
-        botao.addEventListener('click', function (evento) {
-            evento.stopPropagation();
-            if (outroMenu && outroMenu.classList.contains('active')) {
-                outroMenu.classList.remove('active');
-            }
-            menu.classList.toggle('active');
-        });
+
+
+
+
+
+
+
+
+
+
+
+(function () {
+    function gerenciarMenu(botao, menu, outroMenu) {
+        if (botao && menu) {
+            botao.addEventListener('click', function (evento) {
+                evento.stopPropagation();
+                if (outroMenu && outroMenu.classList.contains('active')) {
+                    outroMenu.classList.remove('active');
+                }
+                menu.classList.toggle('active');
+            });
+        }
     }
-}
 
-const btnApps = document.querySelector('.menu-lista .dropdown-trigger');
-const listaApps = document.querySelector('.menu-lista .dropdown-menu');
-const btnPerfil = document.querySelector('.menu-lista-02 .dropdown-trigger');
-const listaPerfil = document.querySelector('.menu-lista-02 .dropdown-menu');
+    const btnApps = document.querySelector('.menu-lista .dropdown-trigger');
+    const listaApps = document.querySelector('.menu-lista .dropdown-menu');
+    const btnPerfil = document.querySelector('.menu-lista-02 .dropdown-trigger');
+    const listaPerfil = document.querySelector('.menu-lista-02 .dropdown-menu');
 
-gerenciarMenu(btnApps, listaApps, listaPerfil);
-gerenciarMenu(btnPerfil, listaPerfil, listaApps);
+    gerenciarMenu(btnApps, listaApps, listaPerfil);
+    gerenciarMenu(btnPerfil, listaPerfil, listaApps);
 
-document.addEventListener('click', function () {
-    if (listaApps && listaApps.classList.contains('active')) { listaApps.classList.remove('active'); }
-    if (listaPerfil && listaPerfil.classList.contains('active')) { listaPerfil.classList.remove('active'); }
-});
+    document.addEventListener('click', function () {
+        if (listaApps && listaApps.classList.contains('active')) { listaApps.classList.remove('active'); }
+        if (listaPerfil && listaPerfil.classList.contains('active')) { listaPerfil.classList.remove('active'); }
+    });
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -201,7 +187,6 @@ const USUARIOS_PERFIS = {
             { texto: "📅 Favoritos", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     },
-
     tutor: {
         senha: "123456",
         nome: "Tutor de Animais",
@@ -211,7 +196,6 @@ const USUARIOS_PERFIS = {
             { texto: "📅 Favoritos", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     },
-
     candidato: {
         senha: "cand!098",
         nome: "Candidato a Adotante",
@@ -221,7 +205,6 @@ const USUARIOS_PERFIS = {
             { texto: "ℹ️ Status do Processo", url: `${BASE_URL}/pages/usuarios/processo.html` }
         ]
     },
-
     ong: {
         senha: "ong$-135",
         nome: "ONG Parceira",
@@ -231,7 +214,6 @@ const USUARIOS_PERFIS = {
             { texto: "🤝 Solicitar Apoio", url: `${BASE_URL}/pages/usuarios/favoritos.html` }
         ]
     },
-
     prefeitura: {
         senha: "pref@456",
         nome: "Gestão Prefeitura",
@@ -242,8 +224,6 @@ const USUARIOS_PERFIS = {
         ]
     }
 };
-
-// Elementos Globais do Modal de Autenticação
 const caixaConteudoPerfil = document.getElementById('conteudo-perfil');
 const modalAuth = document.getElementById('modal-auth');
 const btnFecharAuth = document.getElementById('btn-fechar-auth');
@@ -403,12 +383,96 @@ if (caixaConteudoPerfil && modalAuth) {
             </ul>
         `;
     }
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+// CORRIGIDO: Declarando explicitamente o escopo da variável pendente
+let acaoPendente = null; 
+
+window.usuarioEstaLogado = sessionStorage.getItem('arca_usuario_ativo') !== null;
+
+function executarAcaoFinal(acao) {
+    if (acao === 'adotar') {
+        window.location.href = "../adocao/registrar.html";
+    } else if (acao === 'favoritar') {
+        alert("Animal adicionado aos seus favoritos com sucesso!");
+    }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const btnAdoteAqui = document.getElementById('botao-adotar') || document.querySelector('.js-botao-adotar');
+    const btnFavoritar = document.getElementById('botao-favoritar');
+
+    if (btnAdoteAqui) {
+        btnAdoteAqui.addEventListener('click', function (evento) {
+            evento.preventDefault();
+            evento.stopPropagation();
+
+            let idDetectado = pegarId();
+            if (idDetectado) {
+                localStorage.setItem('arca_id_animal_ativo', idDetectado);
+                console.log("ID atualizado no clique de adoção:", idDetectado);
+            }
+
+            verificarEExecutarPet('adotar');
+        });
+    }
+
+    if (btnFavoritar) {
+        btnFavoritar.addEventListener('click', function (evento) {
+            evento.preventDefault();
+            evento.stopPropagation();
+            verificarEExecutarPet('favoritar');
+        });
+    }
+
+    function verificarEExecutarPet(acao) {
+        window.usuarioEstaLogado = sessionStorage.getItem('arca_usuario_ativo') !== null;
+
+        if (window.usuarioEstaLogado === true) {
+            executarAcaoFinal(acao); 
+        } else {
+            acaoPendente = acao; // Atribuído corretamente aqui
+
+            if (typeof abrirModalAutenticacao === "function") {
+                abrirModalAutenticacao('login');
+            } else {
+                const modalAlvo = document.getElementById('modal-auth');
+                if (modalAlvo) {
+                    modalAlvo.style.display = 'flex';
+                    modalAlvo.classList.add('active');
+                }
+            }
+        }
+    }
+});
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+// =========================================================================
+// ARRAY ESTÁTICO ORIGINAL (Carga Inicial do Banco se o LocalStorage estiver vazio)
+// =========================================================================
 const animais = [
     {
         id: 1,
@@ -472,6 +536,71 @@ const animais = [
     }
 ];
 
+// =========================================================================
+// SISTEMA CRUD - PROJETO ARCA (A sua estrutura correta)
+// =========================================================================
+
+// 1. INICIALIZAÇÃO
+function inicializarBancoDeDados() {
+    if (!localStorage.getItem('arca_animais')) {
+        // Alimenta o localStorage com o array estático se for a primeira execução
+        localStorage.setItem('arca_animais', JSON.stringify(animais));
+    }
+}
+inicializarBancoDeDados();
+
+// 2. READ (Geral)
+function obterAnimaisDoBanco() {
+    return JSON.parse(localStorage.getItem('arca_animais')) || [];
+}
+
+// 3. CREATE
+function cadastrarAnimal(novoAnimal) {
+    const listaAtual = obterAnimaisDoBanco();
+    const proximoId = listaAtual.length > 0 ? Math.max(...listaAtual.map(a => a.id)) + 1 : 1;
+    
+    const animalEstruturado = {
+        id: proximoId,
+        nome: novoAnimal.nome || "Sem nome",
+        subtitulo: novoAnimal.subtitulo || ` "Um amigo leal e cheio de amor."`,
+        imagem: novoAnimal.imagem || "../../public/images/padrao-cao.jpg",
+        titulo_descricao: `Sobre o ${novoAnimal.nome || 'Pet'}`,
+        descricao: novoAnimal.descricao || "Nenhuma descrição informada.",
+        idade: novoAnimal.idade || "Não informada",
+        porte: novoAnimal.porte || "Médio",
+        sexo: novoAnimal.sexo || "Macho",
+        temperamento: novoAnimal.temperamento || "Dócil",
+        endereco_retirada: novoAnimal.endereco_retirada || "Endereço da ONG parceira",
+        data_retirada: novoAnimal.data_retirada || "A combinar",
+        numero_identificacao: `000.000.0${proximoId}`
+    };
+
+    listaAtual.push(animalEstruturado);
+    localStorage.setItem('arca_animais', JSON.stringify(listaAtual));
+    console.log(`Animal ${animalEstruturado.nome} cadastrado com sucesso!`);
+    return true;
+}
+
+// 4. DELETE
+function deletarAnimal(id) {
+    let listaAtual = obterAnimaisDoBanco();
+    const listaFiltrada = listaAtual.filter(animal => animal.id !== parseInt(id, 10));
+    
+    if (listaAtual.length === listaFiltrada.length) {
+        console.warn(`Nenhum animal encontrado com o ID: ${id}`);
+        return false;
+    }
+
+    localStorage.setItem('arca_animais', JSON.stringify(listaFiltrada));
+    console.log(`Animal com ID ${id} removido com sucesso.`);
+    return true;
+}
+
+
+// =========================================================================
+// SISTEMA DE EXIBIÇÃO DE DETALHES (Sua lógica de tela integrada ao CRUD)
+// =========================================================================
+
 function pegarId() {
     let parametros = window.location.search;
     let url = new URLSearchParams(parametros);
@@ -487,13 +616,17 @@ function pegarId() {
 
 function carregarAnimal() {
     let id = pegarId();
-    let animalEncontrado = animais.find(animal => animal.id == id);
+    
+    // MUDANÇA AQUI: Em vez de buscar no array estático, busca na lista viva do banco!
+    const listaViva = obterAnimaisDoBanco();
+    let animalEncontrado = listaViva.find(animal => animal.id == id);
 
     if (!animalEncontrado) {
         console.error(`Animal com o ID ${id} não foi encontrado.`);
         return;
     }
 
+    // Preenchimento dos elementos HTML (Sua lógica original preservada)
     const elNome = document.querySelector(".js-animal-nome");
     if (elNome) elNome.innerText = animalEncontrado.nome;
 
@@ -544,93 +677,36 @@ function voltarPagina() {
     window.history.back();
 }
 
+// Inicializa a carga dos dados da tela baseando-se no banco
 carregarAnimal();
 
 
 
 
-window.usuarioEstaLogado = sessionStorage.getItem('arca_usuario_ativo') !== null;
-
-document.addEventListener("DOMContentLoaded", function () {
-    const btnAdoteAqui = document.getElementById('botao-adotar') || document.querySelector('.js-botao-adotar');
-    const btnFavoritar = document.getElementById('botao-favoritar');
-
-    if (btnAdoteAqui) {
-        btnAdoteAqui.addEventListener('click', function (evento) {
-            evento.preventDefault();
-            evento.stopPropagation();
-
-            let idDetectado = pegarId();
-            if (idDetectado) {
-                localStorage.setItem('arca_id_animal_ativo', idDetectado);
-                console.log("ID atualizado no clique de adoção:", idDetectado);
-            }
-
-            verificarEExecutarPet('adotar');
-        });
-    }
-
-    if (btnFavoritar) {
-        btnFavoritar.addEventListener('click', function (evento) {
-            evento.preventDefault();
-            evento.stopPropagation();
-            verificarEExecutarPet('favoritar');
-        });
-    }
-
-    function verificarEExecutarPet(acao) {
-        window.usuarioEstaLogado = sessionStorage.getItem('arca_usuario_ativo') !== null;
-
-        if (window.usuarioEstaLogado === true) {
-            executarAcaoFinal(acao); // <-- Chamada corrigida
-        } else {
-            acaoPendente = acao;
-
-            if (typeof abrirModalAutenticacao === "function") {
-                abrirModalAutenticacao('login');
-            } else {
-                const modalAlvo = document.getElementById('modal-auth');
-                if (modalAlvo) {
-                    modalAlvo.style.display = 'flex';
-                    modalAlvo.classList.add('active');
-                }
-            }
-        }
-    }
-});
-
-
-
-
-function executarAcaoFinal(acao) {
-    if (acao === 'adotar') {
-        window.location.href = "../adocao/registrar.html";
-    } else if (acao === 'favoritar') {
-        alert("Animal adicionado aos seus favoritos com sucesso!");
-    }
-}
 
 
 
 
 
 
+
+
+
+
+
+
+
+// ==========================================
+// 7. Sistema Aleatório de Aprovação / Recusa (Sorteio)
+// ==========================================
 window.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
+    // Pegamos o ID salvo no localStorage com segurança
+    let idSalvo = localStorage.getItem('arca_id_animal_ativo') || "1";
 
-    const body = document.getElementById('telaStatus');
-    const message = document.getElementById('mensagem');
-    const botaoAcao = document.getElementById('botaoAcao');
-
-
-    let idSalvo = localStorage.getItem('arca_id_animal_ativo');
-    if (!idSalvo) {
-        idSalvo = 1; 
-    }
-
-
-    const btnVerificarAprovacao = document.getElementById('botaoAcaoStatus') || document.querySelector('a[href*="action=sorteio"]') || document.getElementById('verificar-aprovacao');
-
+    // 1. Configura os botões de clique para LEVAR ao sorteio (Caso estejam na página)
+    const btnVerificarAprovacao = document.getElementById('botaoAcaoStatus') || 
+                                  document.querySelector('a[href*="action=sorteio"]') || 
+                                  document.getElementById('verificar-aprovacao');
    
     if (btnVerificarAprovacao) {
         btnVerificarAprovacao.onclick = function (e) {
@@ -638,6 +714,7 @@ window.addEventListener('DOMContentLoaded', () => {
             window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
         };
     }
+    
     const btnVerificarGenerico = document.querySelector('.btn-enviar, .verificar-btn, button, a');
     if (btnVerificarGenerico && btnVerificarGenerico.textContent.includes('VERIFICAR APROVAÇÃO')) {
         btnVerificarGenerico.onclick = function (e) {
@@ -646,35 +723,50 @@ window.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // 2. Só executa a lógica do sorteio se ESTIVERMOS na página de status com o parâmetro correto
+    const params = new URLSearchParams(window.location.search);
     if (params.get('action') === 'sorteio') {
-        if (!body || !message || !botaoAcao) return;
-
-        const sorteio = Math.random();
-
-        if (sorteio < 0.5) {
-            body.className = "approved";
-            message.textContent = "Solicitação de aprovada";
-            botaoAcao.textContent = "Local de retirada";
-
-    
-            botaoAcao.href = `../../pages/adocao/confirm.html?id=${idSalvo}`;
-        } else {
-            body.className = "rejected";
-            message.textContent = "Solicitação rejeitada.";
-            botaoAcao.textContent = "Tentar Recadastro.";
-            botaoAcao.href = "javascript:window.history.back()";
-        }
-    } else {
-        if (!body && !message && !botaoAcao) {
-            return;
-        }
-        if (window.history && window.history.length > 1) {
-            window.history.back();
-        } else {
-            window.location.href = "index.html";
-        }
+        executarLogicaSorteio(params.get('id') || idSalvo);
     }
 });
+
+function ejecutarLogicaSorteio(idAnimal) {
+    const body = document.getElementById('telaStatus');
+    const message = document.getElementById('mensagem');
+    const botaoAcao = document.getElementById('botaoAcao');
+
+    // Se os elementos HTML da tela de status não existirem nesta página, não faz nada (evita quebrar o resto do site)
+    if (!body || !message || !botaoAcao) return;
+
+    const sorteio = Math.random();
+
+    if (sorteio < 0.5) {
+        body.className = "approved";
+        message.textContent = "Solicitação aprovada";
+        botaoAcao.textContent = "Local de retirada";
+        botaoAcao.href = `../../pages/adocao/confirm.html?id=${idAnimal}`;
+    } else {
+        body.className = "rejected";
+        message.textContent = "Solicitação rejeitada.";
+        botaoAcao.textContent = "Tentar Recadastro.";
+        botaoAcao.href = "javascript:window.history.back()";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -688,15 +780,17 @@ const etapa2 = document.getElementById("etapa2");
 const txtEtapa = document.getElementById("txt-etapa");
 
 function proximaEtapa() {
-    etapa1.classList.add("oculto");
-    etapa2.classList.remove("oculto");
-
-    txtEtapa.textContent = "Etapa 2";
+    if (etapa1 && etapa2 && txtEtapa) {
+        etapa1.classList.add("oculto");
+        etapa2.classList.remove("oculto");
+        txtEtapa.textContent = "Etapa 2";
+    }
 }
 
 function voltarEtapa() {
-    etapa2.classList.add("oculto");
-    etapa1.classList.remove("oculto");
-
-    txtEtapa.textContent = "Etapa 1";
+    if (etapa1 && etapa2 && txtEtapa) {
+        etapa2.classList.add("oculto");
+        etapa1.classList.remove("oculto");
+        txtEtapa.textContent = "Etapa 1";
+    }
 }
