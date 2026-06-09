@@ -1,5 +1,204 @@
 "use strict";
 
+
+const animais = [
+    {
+        id: 1,
+        nome: "Thor",
+        subtitulo: '"Um companheiro cheio de energia, carinho e amor."',
+        imagem: "../../public/images/thor-cao.jpg",
+        titulo_descricao: "Sobre o Thor",
+        descricao: "Thor está procurando um lar cheio de amor e cuidado. Ele ama brincar, correr, explorar novos lugares e receber carinho de toda a família.",
+        idade: "2 anos", porte: "Médio", sexo: "Macho", temperamento: "Dócil",
+        endereco_retirada: "Rua Maestro Antônio Cícero, 111 – Caçaroca, Serra – ES, CEP 29176-100.",
+        data_retirada: "10/08/2026",
+        numero_identificacao: "000.000.01"
+    },
+    {
+        id: 2,
+        nome: "Bidu",
+        subtitulo: '"Um amigo leal e calmo para todas as horas."',
+        imagem: "../../public/images/bidu-cao.jpeg",
+        titulo_descricao: "Sobre o Bidu",
+        descricao: "Bidu ama carinho, passeios ao ar livre e é extremamente companheiro.",
+        idade: "3 anos", porte: "Pequeno", sexo: "Macho", temperamento: "Calmo",
+        endereco_retirada: "Av. Governador Bley, 230 – Centro, Vitória – ES, CEP 29010-150.",
+        data_retirada: "12/08/2026",
+        numero_identificacao: "000.000.02"
+    },
+    {
+        id: 3,
+        nome: "Luna",
+        subtitulo: '"Um companheiro cheio de energia..."',
+        imagem: "../../public/images/luna-cao.jpg",
+        titulo_descricao: "Sobre a Luna",
+        descricao: "Luna está procurando um lar cheio de amor e cuidado.",
+        idade: "5 meses", porte: "Médio", sexo: "Fêmea", temperamento: "Dócil",
+        endereco_retirada: "Rua Maestro Antônio Cícero, 111 – Caçaroca, Serra – ES, CEP 29176-100.",
+        data_retirada: "15/08/2026",
+        numero_identificacao: "000.000.03"
+    },
+    {
+        id: 4,
+        nome: "Max",
+        subtitulo: '"Um amigo leal..."',
+        imagem: "../../public/images/max-cao.jpg",
+        titulo_descricao: "Sobre o Max",
+        descricao: "Max ama carinho, passeios ao ar livre e é extremamente companheiro.",
+        idade: "3 anos", porte: "Pequeno", sexo: "Macho", temperamento: "Calmo",
+        endereco_retirada: "Av. Governador Bley, 230 – Centro, Vitória – ES, CEP 29010-150.",
+        data_retirada: "18/08/2026",
+        numero_identificacao: "000.000.04"
+    },
+    {
+        id: 5,
+        nome: "Rex",
+        subtitulo: '"Um amigo leal..."',
+        imagem: "../../public/images/rex-cao.jpg",
+        titulo_descricao: "Sobre o Rex",
+        descricao: "Rex ama carinho, passeios ao ar livre e é extremamente companheiro.",
+        idade: "4 anos", porte: "Pequeno", sexo: "Macho", temperamento: "Calmo",
+        endereco_retirada: "Rua Maestro Antônio Cícero, 111 – Caçaroca, Serra – ES, CEP 29176-100.",
+        data_retirada: "20/08/2026",
+        numero_identificacao: "000.000.05"
+    }
+];
+
+
+
+function inicializarBancoDeDados() {
+    if (!localStorage.getItem('arca_animais')) {
+        localStorage.setItem('arca_animais', JSON.stringify(animais));
+    }
+}
+inicializarBancoDeDados();
+
+function obterAnimaisDoBanco() {
+    return JSON.parse(localStorage.getItem('arca_animais')) || [];
+}
+
+function cadastrarAnimal(novoAnimal) {
+    const listaAtual = obterAnimaisDoBanco();
+    const proximoId = listaAtual.length > 0 ? Math.max(...listaAtual.map(a => a.id)) + 1 : 1;
+    
+    const animalEstruturado = {
+        id: proximoId,
+        nome: novoAnimal.nome || "Sem nome",
+        subtitulo: novoAnimal.subtitulo || ` "Um amigo leal e cheio de amor."`,
+        imagem: novoAnimal.imagem || "../../public/images/padrao-cao.jpg",
+        titulo_descricao: `Sobre o ${novoAnimal.nome || 'Pet'}`,
+        descricao: novoAnimal.descricao || "Nenhuma descrição informada.",
+        idade: novoAnimal.idade || "Não informada",
+        porte: novoAnimal.porte || "Médio",
+        sexo: novoAnimal.sexo || "Macho",
+        temperamento: novoAnimal.temperamento || "Dócil",
+        endereco_retirada: novoAnimal.endereco_retirada || "Endereço da ONG parceira",
+        data_retirada: novoAnimal.data_retirada || "A combinar",
+        numero_identificacao: `000.000.0${proximoId}`
+    };
+
+    listaAtual.push(animalEstruturado);
+    localStorage.setItem('arca_animais', JSON.stringify(listaAtual));
+    console.log(`Animal ${animalEstruturado.nome} cadastrado com sucesso!`);
+    return true;
+}
+
+// 4. DELETE
+function deletarAnimal(id) {
+    let listaAtual = obterAnimaisDoBanco();
+    const listaFiltrada = listaAtual.filter(animal => animal.id !== parseInt(id, 10));
+    
+    if (listaAtual.length === listaFiltrada.length) {
+        console.warn(`Nenhum animal encontrado com o ID: ${id}`);
+        return false;
+    }
+
+    localStorage.setItem('arca_animais', JSON.stringify(listaFiltrada));
+    console.log(`Animal com ID ${id} removido com sucesso.`);
+    return true;
+}
+
+
+// =========================================================================
+// SISTEMA DE EXIBIÇÃO DE DETALHES (Sua lógica de tela integrada ao CRUD)
+// =========================================================================
+
+function pegarId() {
+    let parametros = window.location.search;
+    let url = new URLSearchParams(parametros);
+    let id = url.get("id");
+
+    if (!id) {
+        console.warn("Nenhum ID encontrado na URL. Carregando o animal padrão (ID: 1).");
+        return 1;
+    }
+
+    return parseInt(id, 10);
+}
+
+function carregarAnimal() {
+    let id = pegarId();
+    const listaViva = obterAnimaisDoBanco();
+    let animalEncontrado = listaViva.find(animal => animal.id == id);
+
+    if (!animalEncontrado) {
+        console.error(`Animal com o ID ${id} não foi encontrado.`);
+        return;
+    }
+    const elNome = document.querySelector(".js-animal-nome");
+    if (elNome) elNome.innerText = animalEncontrado.nome;
+
+    const elImg = document.querySelector(".js-animal-imagem");
+    if (elImg) elImg.src = animalEncontrado.imagem;
+
+    const elSubtitulo = document.querySelector(".js-animal-subtitulo");
+    if (elSubtitulo) elSubtitulo.innerText = animalEncontrado.subtitulo;
+
+    const elSobreTitulo = document.querySelector(".js-animal-sobre-titulo");
+    if (elSobreTitulo) elSobreTitulo.innerText = animalEncontrado.titulo_descricao;
+
+    const elDescricao = document.querySelector(".js-animal-descricao");
+    if (elDescricao) elDescricao.innerText = animalEncontrado.descricao;
+
+    const elIdade = document.querySelector(".js-animal-idade");
+    if (elIdade) elIdade.innerText = animalEncontrado.idade;
+
+    const elPorte = document.querySelector(".js-animal-porte");
+    if (elPorte) elPorte.innerText = animalEncontrado.porte;
+
+    const elSexo = document.querySelector(".js-animal-sexo");
+    if (elSexo) elSexo.innerText = animalEncontrado.sexo;
+
+    const elTemperamento = document.querySelector(".js-animal-temperamento");
+    if (elTemperamento) elTemperamento.innerText = animalEncontrado.temperamento;
+
+    const elBotaoAdotar = document.querySelector(".js-botao-adotar");
+    if (elBotaoAdotar) elBotaoAdotar.innerText = `🐾 Quero Adotar o ${animalEncontrado.nome}`;
+
+    const elConfFoto = document.querySelector(".js-confirmacao-foto");
+    if (elConfFoto) elConfFoto.src = animalEncontrado.imagem;
+
+    const elConfNome = document.querySelector(".js-confirmacao-nome");
+    if (elConfNome) elConfNome.innerText = animalEncontrado.nome;
+
+    const elConfEndereco = document.querySelector(".js-confirmacao-endereco");
+    if (elConfEndereco) elConfEndereco.innerText = animalEncontrado.endereco_retirada;
+
+    const elConfData = document.querySelector(".js-confirmacao-data");
+    if (elConfData) elConfData.innerText = animalEncontrado.data_retirada;
+
+    const elConfId = document.querySelector(".js-confirmacao-id");
+    if (elConfId) elConfId.innerText = animalEncontrado.numero_identificacao;
+}
+
+function voltarPagina() {
+    window.history.back();
+}
+carregarAnimal();
+
+
+
+
 (function () {
     const slider = document.querySelectorAll('.slider');
     const btnPrev = document.getElementById('prev-button');
@@ -48,12 +247,6 @@
         startTimer();
     }
 })();
-
-
-
-
-
-
 
 
 
@@ -119,17 +312,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 (function () {
     function gerenciarMenu(botao, menu, outroMenu) {
         if (botao && menu) {
@@ -156,21 +338,6 @@
         if (listaPerfil && listaPerfil.classList.contains('active')) { listaPerfil.classList.remove('active'); }
     });
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -387,16 +554,6 @@ if (caixaConteudoPerfil && modalAuth) {
 
 
 
-
-
-
-
-
-
-
-
-
-// CORRIGIDO: Declarando explicitamente o escopo da variável pendente
 let acaoPendente = null; 
 
 window.usuarioEstaLogado = sessionStorage.getItem('arca_usuario_ativo') !== null;
@@ -460,318 +617,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-// =========================================================================
-// ARRAY ESTÁTICO ORIGINAL (Carga Inicial do Banco se o LocalStorage estiver vazio)
-// =========================================================================
-const animais = [
-    {
-        id: 1,
-        nome: "Thor",
-        subtitulo: '"Um companheiro cheio de energia, carinho e amor."',
-        imagem: "../../public/images/thor-cao.jpg",
-        titulo_descricao: "Sobre o Thor",
-        descricao: "Thor está procurando um lar cheio de amor e cuidado. Ele ama brincar, correr, explorar novos lugares e receber carinho de toda a família.",
-        idade: "2 anos", porte: "Médio", sexo: "Macho", temperamento: "Dócil",
-        endereco_retirada: "Rua Maestro Antônio Cícero, 111 – Caçaroca, Serra – ES, CEP 29176-100.",
-        data_retirada: "10/08/2026",
-        numero_identificacao: "000.000.01"
-    },
-    {
-        id: 2,
-        nome: "Bidu",
-        subtitulo: '"Um amigo leal e calmo para todas as horas."',
-        imagem: "../../public/images/bidu-cao.jpeg",
-        titulo_descricao: "Sobre o Bidu",
-        descricao: "Bidu ama carinho, passeios ao ar livre e é extremamente companheiro.",
-        idade: "3 anos", porte: "Pequeno", sexo: "Macho", temperamento: "Calmo",
-        endereco_retirada: "Av. Governador Bley, 230 – Centro, Vitória – ES, CEP 29010-150.",
-        data_retirada: "12/08/2026",
-        numero_identificacao: "000.000.02"
-    },
-    {
-        id: 3,
-        nome: "Luna",
-        subtitulo: '"Um companheiro cheio de energia..."',
-        imagem: "../../public/images/luna-cao.jpg",
-        titulo_descricao: "Sobre a Luna",
-        descricao: "Luna está procurando um lar cheio de amor e cuidado.",
-        idade: "5 meses", porte: "Médio", sexo: "Fêmea", temperamento: "Dócil",
-        endereco_retirada: "Rua Maestro Antônio Cícero, 111 – Caçaroca, Serra – ES, CEP 29176-100.",
-        data_retirada: "15/08/2026",
-        numero_identificacao: "000.000.03"
-    },
-    {
-        id: 4,
-        nome: "Max",
-        subtitulo: '"Um amigo leal..."',
-        imagem: "../../public/images/max-cao.jpg",
-        titulo_descricao: "Sobre o Max",
-        descricao: "Max ama carinho, passeios ao ar livre e é extremamente companheiro.",
-        idade: "3 anos", porte: "Pequeno", sexo: "Macho", temperamento: "Calmo",
-        endereco_retirada: "Av. Governador Bley, 230 – Centro, Vitória – ES, CEP 29010-150.",
-        data_retirada: "18/08/2026",
-        numero_identificacao: "000.000.04"
-    },
-    {
-        id: 5,
-        nome: "Rex",
-        subtitulo: '"Um amigo leal..."',
-        imagem: "../../public/images/rex-cao.jpg",
-        titulo_descricao: "Sobre o Rex",
-        descricao: "Rex ama carinho, passeios ao ar livre e é extremamente companheiro.",
-        idade: "4 anos", porte: "Pequeno", sexo: "Macho", temperamento: "Calmo",
-        endereco_retirada: "Rua Maestro Antônio Cícero, 111 – Caçaroca, Serra – ES, CEP 29176-100.",
-        data_retirada: "20/08/2026",
-        numero_identificacao: "000.000.05"
-    }
-];
-
-// =========================================================================
-// SISTEMA CRUD - PROJETO ARCA (A sua estrutura correta)
-// =========================================================================
-
-// 1. INICIALIZAÇÃO
-function inicializarBancoDeDados() {
-    if (!localStorage.getItem('arca_animais')) {
-        // Alimenta o localStorage com o array estático se for a primeira execução
-        localStorage.setItem('arca_animais', JSON.stringify(animais));
-    }
-}
-inicializarBancoDeDados();
-
-// 2. READ (Geral)
-function obterAnimaisDoBanco() {
-    return JSON.parse(localStorage.getItem('arca_animais')) || [];
-}
-
-// 3. CREATE
-function cadastrarAnimal(novoAnimal) {
-    const listaAtual = obterAnimaisDoBanco();
-    const proximoId = listaAtual.length > 0 ? Math.max(...listaAtual.map(a => a.id)) + 1 : 1;
-    
-    const animalEstruturado = {
-        id: proximoId,
-        nome: novoAnimal.nome || "Sem nome",
-        subtitulo: novoAnimal.subtitulo || ` "Um amigo leal e cheio de amor."`,
-        imagem: novoAnimal.imagem || "../../public/images/padrao-cao.jpg",
-        titulo_descricao: `Sobre o ${novoAnimal.nome || 'Pet'}`,
-        descricao: novoAnimal.descricao || "Nenhuma descrição informada.",
-        idade: novoAnimal.idade || "Não informada",
-        porte: novoAnimal.porte || "Médio",
-        sexo: novoAnimal.sexo || "Macho",
-        temperamento: novoAnimal.temperamento || "Dócil",
-        endereco_retirada: novoAnimal.endereco_retirada || "Endereço da ONG parceira",
-        data_retirada: novoAnimal.data_retirada || "A combinar",
-        numero_identificacao: `000.000.0${proximoId}`
-    };
-
-    listaAtual.push(animalEstruturado);
-    localStorage.setItem('arca_animais', JSON.stringify(listaAtual));
-    console.log(`Animal ${animalEstruturado.nome} cadastrado com sucesso!`);
-    return true;
-}
-
-// 4. DELETE
-function deletarAnimal(id) {
-    let listaAtual = obterAnimaisDoBanco();
-    const listaFiltrada = listaAtual.filter(animal => animal.id !== parseInt(id, 10));
-    
-    if (listaAtual.length === listaFiltrada.length) {
-        console.warn(`Nenhum animal encontrado com o ID: ${id}`);
-        return false;
-    }
-
-    localStorage.setItem('arca_animais', JSON.stringify(listaFiltrada));
-    console.log(`Animal com ID ${id} removido com sucesso.`);
-    return true;
-}
-
-
-// =========================================================================
-// SISTEMA DE EXIBIÇÃO DE DETALHES (Sua lógica de tela integrada ao CRUD)
-// =========================================================================
-
-function pegarId() {
-    let parametros = window.location.search;
-    let url = new URLSearchParams(parametros);
-    let id = url.get("id");
-
-    if (!id) {
-        console.warn("Nenhum ID encontrado na URL. Carregando o animal padrão (ID: 1).");
-        return 1;
-    }
-
-    return parseInt(id, 10);
-}
-
-function carregarAnimal() {
-    let id = pegarId();
-    
-    // MUDANÇA AQUI: Em vez de buscar no array estático, busca na lista viva do banco!
-    const listaViva = obterAnimaisDoBanco();
-    let animalEncontrado = listaViva.find(animal => animal.id == id);
-
-    if (!animalEncontrado) {
-        console.error(`Animal com o ID ${id} não foi encontrado.`);
-        return;
-    }
-
-    // Preenchimento dos elementos HTML (Sua lógica original preservada)
-    const elNome = document.querySelector(".js-animal-nome");
-    if (elNome) elNome.innerText = animalEncontrado.nome;
-
-    const elImg = document.querySelector(".js-animal-imagem");
-    if (elImg) elImg.src = animalEncontrado.imagem;
-
-    const elSubtitulo = document.querySelector(".js-animal-subtitulo");
-    if (elSubtitulo) elSubtitulo.innerText = animalEncontrado.subtitulo;
-
-    const elSobreTitulo = document.querySelector(".js-animal-sobre-titulo");
-    if (elSobreTitulo) elSobreTitulo.innerText = animalEncontrado.titulo_descricao;
-
-    const elDescricao = document.querySelector(".js-animal-descricao");
-    if (elDescricao) elDescricao.innerText = animalEncontrado.descricao;
-
-    const elIdade = document.querySelector(".js-animal-idade");
-    if (elIdade) elIdade.innerText = animalEncontrado.idade;
-
-    const elPorte = document.querySelector(".js-animal-porte");
-    if (elPorte) elPorte.innerText = animalEncontrado.porte;
-
-    const elSexo = document.querySelector(".js-animal-sexo");
-    if (elSexo) elSexo.innerText = animalEncontrado.sexo;
-
-    const elTemperamento = document.querySelector(".js-animal-temperamento");
-    if (elTemperamento) elTemperamento.innerText = animalEncontrado.temperamento;
-
-    const elBotaoAdotar = document.querySelector(".js-botao-adotar");
-    if (elBotaoAdotar) elBotaoAdotar.innerText = `🐾 Quero Adotar o ${animalEncontrado.nome}`;
-
-    const elConfFoto = document.querySelector(".js-confirmacao-foto");
-    if (elConfFoto) elConfFoto.src = animalEncontrado.imagem;
-
-    const elConfNome = document.querySelector(".js-confirmacao-nome");
-    if (elConfNome) elConfNome.innerText = animalEncontrado.nome;
-
-    const elConfEndereco = document.querySelector(".js-confirmacao-endereco");
-    if (elConfEndereco) elConfEndereco.innerText = animalEncontrado.endereco_retirada;
-
-    const elConfData = document.querySelector(".js-confirmacao-data");
-    if (elConfData) elConfData.innerText = animalEncontrado.data_retirada;
-
-    const elConfId = document.querySelector(".js-confirmacao-id");
-    if (elConfId) elConfId.innerText = animalEncontrado.numero_identificacao;
-}
-
-function voltarPagina() {
-    window.history.back();
-}
-
-// Inicializa a carga dos dados da tela baseando-se no banco
-carregarAnimal();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ==========================================
-// 7. Sistema Aleatório de Aprovação / Recusa (Sorteio)
-// ==========================================
 window.addEventListener('DOMContentLoaded', () => {
-    // Pegamos o ID salvo no localStorage com segurança
-    let idSalvo = localStorage.getItem('arca_id_animal_ativo') || "1";
 
-    // 1. Configura os botões de clique para LEVAR ao sorteio (Caso estejam na página)
-    const btnVerificarAprovacao = document.getElementById('botaoAcaoStatus') || 
-                                  document.querySelector('a[href*="action=sorteio"]') || 
-                                  document.getElementById('verificar-aprovacao');
-   
+    const idSalvo = localStorage.getItem('arca_id_animal_ativo') || "1";
+
+    const btnVerificarAprovacao =
+        document.getElementById('botaoAcaoStatus') ||
+        document.querySelector('a[href*="action=sorteio"]') ||
+        document.getElementById('verificar-aprovacao');
+
     if (btnVerificarAprovacao) {
         btnVerificarAprovacao.onclick = function (e) {
             e.preventDefault();
             window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
         };
     }
-    
-    const btnVerificarGenerico = document.querySelector('.btn-enviar, .verificar-btn, button, a');
-    if (btnVerificarGenerico && btnVerificarGenerico.textContent.includes('VERIFICAR APROVAÇÃO')) {
+
+    const btnVerificarGenerico =
+        document.querySelector('.btn-enviar, .verificar-btn');
+
+    if (
+        btnVerificarGenerico &&
+        btnVerificarGenerico.textContent &&
+        btnVerificarGenerico.textContent.includes('VERIFICAR APROVAÇÃO')
+    ) {
         btnVerificarGenerico.onclick = function (e) {
             e.preventDefault();
             window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
         };
     }
 
-    // 2. Só executa a lógica do sorteio se ESTIVERMOS na página de status com o parâmetro correto
     const params = new URLSearchParams(window.location.search);
+
     if (params.get('action') === 'sorteio') {
         executarLogicaSorteio(params.get('id') || idSalvo);
     }
 });
 
-function ejecutarLogicaSorteio(idAnimal) {
+function executarLogicaSorteio(idAnimal) {
+
     const body = document.getElementById('telaStatus');
     const message = document.getElementById('mensagem');
     const botaoAcao = document.getElementById('botaoAcao');
 
-    // Se os elementos HTML da tela de status não existirem nesta página, não faz nada (evita quebrar o resto do site)
     if (!body || !message || !botaoAcao) return;
 
     const sorteio = Math.random();
 
     if (sorteio < 0.5) {
+
         body.className = "approved";
         message.textContent = "Solicitação aprovada";
         botaoAcao.textContent = "Local de retirada";
-        botaoAcao.href = `../../pages/adocao/confirm.html?id=${idAnimal}`;
+
+        botaoAcao.onclick = () => {
+            window.location.href = `../../pages/adocao/confirm.html?id=${idAnimal}`;
+        };
+
     } else {
+
         body.className = "rejected";
-        message.textContent = "Solicitação rejeitada.";
-        botaoAcao.textContent = "Tentar Recadastro.";
-        botaoAcao.href = "javascript:window.history.back()";
+        message.textContent = "Solicitação rejeitada";
+        botaoAcao.textContent = "Tentar Recadastro";
+
+        botaoAcao.onclick = () => {
+            window.history.back();
+        };
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
