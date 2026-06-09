@@ -638,44 +638,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-
-    const idSalvo = localStorage.getItem('arca_id_animal_ativo') || "1";
-
-    const btnVerificarAprovacao =
-        document.getElementById('botaoAcaoStatus') ||
-        document.querySelector('a[href*="action=sorteio"]') ||
-        document.getElementById('verificar-aprovacao');
-
+    let idSalvo = localStorage.getItem('arca_id_animal_ativo') || "1";
+    const btnVerificarAprovacao = document.getElementById('botaoAcaoStatus') || 
+                                  document.querySelector('a[href*="action=sorteio"]') || 
+                                  document.getElementById('verificar-aprovacao');
+   
     if (btnVerificarAprovacao) {
         btnVerificarAprovacao.onclick = function (e) {
             e.preventDefault();
             window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
         };
     }
-
-    const btnVerificarGenerico =
-        document.querySelector('.btn-enviar, .verificar-btn');
-
-    if (
-        btnVerificarGenerico &&
-        btnVerificarGenerico.textContent &&
-        btnVerificarGenerico.textContent.includes('VERIFICAR APROVAÇÃO')
-    ) {
-        btnVerificarGenerico.onclick = function (e) {
-            e.preventDefault();
-            window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
-        };
-    }
+    const botoesDaPagina = document.querySelectorAll('.btn-enviar, .verificar-btn, button, a');
+    botoesDaPagina.forEach(btn => {
+        if (btn.textContent.includes('VERIFICAR APROVAÇÃO')) {
+            btn.onclick = function (e) {
+                e.preventDefault();
+                window.location.href = `status.html?action=sorteio&id=${idSalvo}`;
+            };
+        }
+    });
 
     const params = new URLSearchParams(window.location.search);
-
     if (params.get('action') === 'sorteio') {
         executarLogicaSorteio(params.get('id') || idSalvo);
     }
 });
 
 function executarLogicaSorteio(idAnimal) {
-
     const body = document.getElementById('telaStatus');
     const message = document.getElementById('mensagem');
     const botaoAcao = document.getElementById('botaoAcao');
@@ -685,24 +675,15 @@ function executarLogicaSorteio(idAnimal) {
     const sorteio = Math.random();
 
     if (sorteio < 0.5) {
-
         body.className = "approved";
         message.textContent = "Solicitação aprovada";
         botaoAcao.textContent = "Local de retirada";
-
-        botaoAcao.onclick = () => {
-            window.location.href = `../../pages/adocao/confirm.html?id=${idAnimal}`;
-        };
-
+        botaoAcao.href = `../../pages/adocao/confirm.html?id=${idAnimal}`;
     } else {
-
         body.className = "rejected";
-        message.textContent = "Solicitação rejeitada";
-        botaoAcao.textContent = "Tentar Recadastro";
-
-        botaoAcao.onclick = () => {
-            window.history.back();
-        };
+        message.textContent = "Solicitação rejeitada.";
+        botaoAcao.textContent = "Tentar Recadastro.";
+        botaoAcao.href = "javascript:window.history.back()";
     }
 }
 
