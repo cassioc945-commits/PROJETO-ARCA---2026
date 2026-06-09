@@ -689,6 +689,7 @@ function executarLogicaSorteio(idAnimal) {
 
 
 
+
 const etapa1 = document.getElementById("etapa1");
 const etapa2 = document.getElementById("etapa2");
 const txtEtapa = document.getElementById("txt-etapa");
