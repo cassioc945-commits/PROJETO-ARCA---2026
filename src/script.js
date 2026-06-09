@@ -117,12 +117,6 @@ function deletarAnimal(id) {
     console.log(`Animal com ID ${id} removido com sucesso.`);
     return true;
 }
-
-
-// =========================================================================
-// SISTEMA DE EXIBIÇÃO DE DETALHES (Sua lógica de tela integrada ao CRUD)
-// =========================================================================
-
 function pegarId() {
     let parametros = window.location.search;
     let url = new URLSearchParams(parametros);
