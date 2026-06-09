@@ -103,7 +103,33 @@ function cadastrarAnimal(novoAnimal) {
     return true;
 }
 
-// 4. DELETE
+function atualizarAnimal(id, novosDados) {
+    const listaAtual = obterAnimaisDoBanco();
+
+    const indiceAnimal = listaAtual.findIndex(
+        animal => animal.id === parseInt(id, 10)
+    );
+
+    if (indiceAnimal === -1) {
+        console.warn(`Nenhum animal encontrado com o ID ${id}`);
+        return false;
+    }
+
+    listaAtual[indiceAnimal] = {
+        ...listaAtual[indiceAnimal],
+        ...novosDados
+    };
+
+    localStorage.setItem(
+        'arca_animais',
+        JSON.stringify(listaAtual)
+    );
+
+    console.log(`Animal ${id} atualizado com sucesso.`);
+    return true;
+}
+
+
 function deletarAnimal(id) {
     let listaAtual = obterAnimaisDoBanco();
     const listaFiltrada = listaAtual.filter(animal => animal.id !== parseInt(id, 10));
